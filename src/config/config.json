@@ -1,0 +1,22 @@
+{
+  "debug": true,
+  "sandbox":{
+    "db_default": {
+      "host" : "localhost",
+      "port" : "3306",
+      "dbname" : "haloapi",
+      "username" : "root",
+      "password" : ""
+    }
+  },
+  
+  "production":{
+    "db_default": {
+      "host" : "localhost",
+      "port" : "3306",
+      "dbname" : "haloapi",
+      "username" : "root",
+      "password" : ""
+    }
+  }
+}
