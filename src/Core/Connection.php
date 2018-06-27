@@ -65,17 +65,5 @@ class Connection{
 	 */
 	private function __clone() {
 	}
-
-	public function getParameter(string $parameter="") {
-		if($this->$jsonConfig['debug'] === true){
-			if(array_key_exists($parameter, $this->jsonConfig['sandbox'])){
-				return $this->jsonConfig['sandbox'][$parameter];
-			}
-		}else{
-			if(array_key_exists($parameter, $this->jsonConfig['production'])){
-				return $this->jsonConfig['sandbox'][$parameter];
-			}
-		}		
-	}
 }
 ?>
