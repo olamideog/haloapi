@@ -23,13 +23,12 @@ class CoreModel{
 	
 	private $_statement;
 
-	private $_parameters;
+	private $_parameters = array();
 	
 	public function __construct($profile=""){
 		$this->_connection = Connection::getInstance($profile);
 		$this->setTable();
 		$this->setPrimarykey();
-		return $this;
 	}
 
 	protected function setTable(){
@@ -174,7 +173,7 @@ class CoreModel{
 
 	public function rawQuery($query, $parameters = array()){
 		if(empty(!$query)){
-
+			
 			try{
 				$this->_statement = $this->_connection->prepare($query);
 
@@ -184,8 +183,7 @@ class CoreModel{
 					}
 				}			
 				
-				$this->_statement->execute();
-				return true;
+				return $this->_statement->execute();
 			}catch(\Exception $e){
 				Response::error400("Something went wrong with Query");
 			}

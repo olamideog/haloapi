@@ -15,7 +15,7 @@ use Api\Tools\Response;
 class Connection{
 	use Light;
 	
-	private $_connection;
+	private $connection;
 	private static $_instance;
 	private $_jsonConfig;	
 	
@@ -29,7 +29,7 @@ class Connection{
 			if (!(self::$_instance instanceof self)) {
 	 			self::$_instance = new self($profile);
 		    }
-		    return self::$_instance;
+		    return self::$_instance->connection;
 		}else{
 			return Response::error400();
 		}	 	
@@ -51,8 +51,9 @@ class Connection{
 		}
 
 		try{
-			$this->_connection = new \PDO("mysql:host=".$profile['host'].";dbname=".$profile['dbname'], $profile['username'], $profile['password']);
-			$this->_connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+			$this->connection = new \PDO("mysql:host=".$profile['host'].";dbname=".$profile['dbname'], $profile['username'], $profile['password']);
+			$this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+			return $this->connection;
 		}catch(\PDOException $e){
 			Response::error500($e->getMessage());
 		}
