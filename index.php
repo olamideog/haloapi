@@ -1,6 +1,6 @@
 <?php
 include_once("vendor/autoload.php");
-
+$request = new  Api\Tools\Request;
 $Users = new Api\Models\Users('db_default');
 /*echo "For Model Users <br/>";
 echo "Default Table Name: ". $Users->table."<br/>";
@@ -22,15 +22,16 @@ echo "<br/><br/>";*/
  * There's still a lot to be done to make it production ready but this test shows the principle of 
  * Traits, Singleton and OOP
  */
-$request = new  Api\Tools\Request;
-foreach($request->post() as $key=>$value){
-	if($key == 'method'){
-		switch{
-			case 'get/users';
-			echo json_encode(array('status' => true, 'data' => $Users->get()));
-			break;
-		}		
+$api_key = $request->get('api_key');
+if(($request->get('api_key') == 'api_key_value') && ($request->get('username') == 'olamide')){
+	foreach($request->post() as $key=>$value){
+		if($key == 'method'){
+			switch{
+				case 'get/users';
+					echo json_encode(array('status' => true, 'data' => $Users->get()));
+				break;
+			}		
+		}
 	}
 }
-
 ?>
